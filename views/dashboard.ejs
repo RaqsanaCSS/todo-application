@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Welcome to Your Dashboard!</h2>
+    
+        <!-- Task List Display -->
+        <div id="task-list">
+            <h3>Your Tasks:</h3>
+            <% if (tasks && tasks.length > 0) { %>
+                <% tasks.forEach(function(task, index) { %>
+                    <div class="task" onclick="toggleDescription('desc<%= index %>')">
+                        <div class="title"><%= task.title %></div>
+                        <div id="desc<%= index %>" class="description">
+                            <%= task.description %>
+                        </div>
+                    </div>
+                <% }); %>
+            <% } else { %>
+                <p>No tasks to show. Add a new task below!</p>
+            <% } %>
+        </div>
+    
+        <!-- Form to Add New Task -->
+        <div id="add-task-form">
+            <h3>Add a New Task:</h3>
+            <form action="/tasks/add" method="POST">
+                <input type="text" name="title" placeholder="Task Title" required>
+                <textarea name="description" placeholder="Task Description" required></textarea>
+                <button type="submit">Add Task</button>
+            </form>
+        </div>
+    </div>
+    
+
+    <script>
+        // Function to toggle the display of the task description
+        function toggleDescription(id) {
+            var element = document.getElementById(id);
+            if (element.style.display === 'none') {
+                element.style.display = 'block';
+            } else {
+                element.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
