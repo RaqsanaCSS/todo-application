@@ -238,6 +238,11 @@ As the last step to deploy application I run docker image exposing 3000 port to 
   command: docker run -d --name "{{ docker_container_name }}" -p "{{ host_port }}:{{ app_port }}" "{{ docker_image_name }}"
 ```
 
+## CI / CD PIPELINE
+
+I have two stages testing and deploying. During testing stage I tested that webserver can access database or not. Since I have rule for database server that only webserver can access database I created bash script for testing and save it in pipeline variables then I added ssh private key to my ssh agent. After login the webserver I run test bash script to check database is accessible or not if it is I move on deploy stage. 
+
+During deployment stage I also add ssh private key to my ssh agent in order to stop providing id_rsa to ansible-playbook. Since my ansible files are in github to clone them I installed git and to run them I installed ansible. Decrypting vault protected variable files I created file storing vault password in order not to use --ask-vault-pass because it breaks pipeline. Then I cloned ansible files from github using access token. At the end I run ansible playbook which enters webserver clone, build and run docker image.
 
 **Finally I run these commands to run ansible scripts:**
 
