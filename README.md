@@ -183,7 +183,7 @@ I pull node:16 image and create workdir as /app. Copying packages to install npm
   },
 ```
 
-I had to transfer this files to the droplet I decided that push it to github and cloning it from there is the best way. So I created private repository https://github.com/accap3035/todo-app-devops.git
+I had to transfer this files to the droplet I decided that push it to github and cloning it from there is the best way. So I created private repository https://github.com/RaqsanaCSS/todo-application.git
 
 ## Cloning and building web app image
 
